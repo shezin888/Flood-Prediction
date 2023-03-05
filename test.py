@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 with rio.open('/home/shezin/Desktop/Flood Estimation/srm/band03_srm.tif') as dataset:
-    val = dataset.read(1) # band 5
+    val = dataset.read() # band 5
     no_data=dataset.nodata
     data = [(dataset.xy(x,y)[0],dataset.xy(x,y)[1],val[x,y]) for x,y in np.ndindex(val.shape) if val[x,y] != no_data]
     lon = [i[0] for i in data]
@@ -12,6 +12,7 @@ with rio.open('/home/shezin/Desktop/Flood Estimation/srm/band03_srm.tif') as dat
     res = pd.DataFrame({"long":lon,'lat':lat,"data":d})
 print(res.shape)
 #print(res.max())
+
 
 
 # import matplotlib.pyplot as plt
